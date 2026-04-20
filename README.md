@@ -1,44 +1,52 @@
 # LocalChess
 
-## Introduction
-LocalChess is a fun and interactive chess game that allows players to enjoy chess locally, either against a friend or against an AI opponent. The application is designed to provide a rich user experience while retaining the classic elements of chess.
-
-## Features
-- Play against a friend or AI opponent.
-- Adjustable AI difficulty levels.
-- Real-time move validation.
-- Nice graphical interface for board display.
-- Option to undo moves.
-- Save and load game states.
-
-## Installation
-To install LocalChess, follow these steps:
-1. Clone the repository:
+## Docker Setup
+To set up LocalChess using Docker, follow these steps:
+1. Ensure Docker is installed on your machine.
+2. Clone the repository:
    ```bash
    git clone https://github.com/Licent1/LocalChess.git
-   ```
-2. Navigate into the directory:
-   ```bash
    cd LocalChess
    ```
-3. Install the required dependencies:
+3. Build the Docker image:
+   ```bash
+   docker build -t localchess .
+   ```
+4. Run the Docker container:
+   ```bash
+   docker run -p 3000:3000 localchess
+   ```
+
+## Backend Installation
+To install the backend, perform the following:
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+2. Install dependencies:
    ```bash
    npm install
    ```
+3. Start the backend server:
+   ```bash
+   npm start
+   ```
 
-## Usage
-To start LocalChess, run:
-```bash
-npm start
-```
-After the application starts, choose your mode (Player vs. Player or Player vs. AI) and enjoy the game!
+## Authentication API Functionality
+The authentication API of LocalChess allows users to register and login. It supports JWT for managing user sessions. The following endpoints are available:
+- **POST /auth/register**: Register a new user.
+  - Body: `{
+      "username": "string",
+      "password": "string"
+   }`
 
-## Contributing
-We welcome contributions from the community! If you'd like to contribute:
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-YourFeature`).
-3. Make your changes and commit them (`git commit -m 'Add some feature'`).
-4. Push to the branch (`git push origin feature-YourFeature`).
-5. Open a pull request describing your changes.
+- **POST /auth/login**: Log in a user and receive a JWT.
+  - Body: `{
+      "username": "string",
+      "password": "string"
+   }`
 
-Happy gaming!
+Ensure to include the JWT in the Authorization header for any protected routes.
+
+## License
+This project is licensed under the MIT License.
