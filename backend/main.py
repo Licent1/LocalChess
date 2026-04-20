@@ -18,7 +18,17 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
+from database import engine, Base
+from routers import auth
+
 app = FastAPI()
+
+app.include_router(auth.router)
+
+@app.on_event("startup")
+async def startup():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
 
 # Allow frontend to call backend in dev
 app.add_middleware(
