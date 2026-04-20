@@ -1,4 +1,8 @@
 fastapi
 uvicorn[standard]
+sqlalchemy[asyncio]
+aiomysql
+passlib[bcrypt]
+python-jose[cryptography]
 python-chess
 pydantic
